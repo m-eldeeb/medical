@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Basic -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Mobile Metas -->
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <link rel="shortcut icon" href="/assets/img/favicon.png" type="" />
+
+    <title>Care</title>
+
+    <!-- bootstrap core css -->
+    <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.css" />
+
+    <!-- fonts style -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- font awesome style -->
+    <link href="/assets/css/font-awesome.min.css" rel="stylesheet" />
+
+    <!-- Custom styles for this template -->
+    <link href="/assets/css/style.css" rel="stylesheet" />
+    <!-- responsive style -->
+    <link href="/assets/css/responsive.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/assets/css/main.css" />
+  </head>
+
+  <body>
+    <div class="hero_area">
+      <div class="container mt-5">
+        <form class="box mt-5 w-50" action="/auth/admin" method="post">
+          <% if (catchErr) { %>
+            <div class="alert alert-danger">Server Error</div>
+            <% } %>
+          <h1 class="text-center mb-3">Sign in Dashboard</h1>
+
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label"
+              >userName</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="exampleInputEmail1"
+              name="name"
+            />
+          </div>
+          <div class="mb-3 position-relative">
+            <label for="password" class="form-label">Password</label>
+            <input
+              type="password"
+              class="form-control"
+              id="password"
+              name="password"
+            />
+            <i
+              class="fa fa-eye show-password"
+              aria-hidden="true"
+              id="toggle-password"
+            ></i>
+          </div>
+          <button type="submit" class="btn btn-primary w-100 custom-btn">
+            sign in
+          </button>
+        </form>
+      </div>
+
+
+      <!-- jQery -->
+    </div>
+    <script
+      type="text/javascript"
+      src="/assets/js/jquery-3.4.1.min.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="/assets/js/owl.carousel.min.js"
+    ></script>
+    <!-- custom js -->
+    <script type="text/javascript" src="/assets/js/custom.js"></script>
+  </body>
+</html>

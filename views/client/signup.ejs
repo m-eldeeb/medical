@@ -1,0 +1,177 @@
+<%- include('../layouts/header-green.ejs') %> <% if (catchErr) { %>
+<div class="alert alert-danger"><%= catchErr %></div>
+<% } %>
+
+<div class="container pb-5">
+  <form
+    class="box mt-5 w-50"
+    action="/signup"
+    method="post"
+    enctype="multipart/form-data"
+  >
+    <h1 class="text-center mb-3">Sign up</h1>
+    <% if (userExist) { %>
+    <div class="alert alert-danger">Email Is Exist Try Another One</div>
+    <% } %> <% if (catchErr) { %>
+    <div class="alert alert-danger">Server Error</div>
+    <% } %>
+    <div class="mb-3 position-relative">
+      <label for="exampleInputText" class="form-label">Username</label>
+      <input
+        type="text"
+        class="form-control"
+        id="exampleInputText"
+        name="userName"
+        value="<%= oldInputs?.userName  %>"
+      />
+      <% if (validationErr?.includes('userName')) { %>
+      <div class="alert alert-danger mt-2">in-valid userName</div>
+      <% } %>
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Email address</label>
+      <input
+        type="email"
+        class="form-control"
+        id="exampleInputEmail1"
+        name="email"
+        value="<%= oldInputs?.email  %>"
+      /><% if (validationErr?.includes('email')) { %>
+      <div class="alert alert-danger mt-2">in-valid Email</div>
+      <% } %>
+    </div>
+    <div class="mb-3 position-relative">
+      <label for="password" class="form-label">Password</label>
+      <input
+        type="password"
+        class="form-control"
+        id="password"
+        name="password"
+        value="<%= oldInputs?.password  %>"
+      />
+      <i
+        class="fa fa-eye show-password"
+        aria-hidden="true"
+        id="toggle-password"
+      ></i>
+      <% if (validationErr?.includes('password')) { %>
+      <div class="alert alert-danger mt-2">
+        in-valid Pasword must have at least 6 chrs
+      </div>
+      <% } %>
+    </div>
+    <div class="mb-3 position-relative">
+      <label for="confirm-password" class="form-label">Confirm Password</label>
+      <input
+        type="password"
+        class="form-control"
+        id="confirm-password"
+        name="cPassword"
+        value="<%= oldInputs?.cPassword  %>"
+      />
+      <i
+        class="fa fa-eye show-password"
+        aria-hidden="true"
+        id="toggle-confirm-password"
+      ></i>
+      <% if (validationErr?.includes('cPassword')) { %>
+      <div class="alert alert-danger mt-2">passwords mis-Match</div>
+      <% } %>
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputPhone" class="form-label">phone</label>
+      <input
+        type="tel"
+        class="form-control"
+        id="exampleInputPhone"
+        name="phone"
+        value="<%= oldInputs?.phone  %>"
+      />
+      <% if (validationErr?.includes('phone')) { %>
+      <div class="alert alert-danger mt-2">in-valid Phone</div>
+      <% } %>
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputPhone" class="form-label">Address</label>
+      <input
+        type="text"
+        class="form-control"
+        id="exampleInputPhone"
+        name="address"
+        value="<%= oldInputs?.address  %>"
+      />
+      <% if (validationErr?.includes('address')) { %>
+      <div class="alert alert-danger mt-2">in-valid Address</div>
+      <% } %>
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label">Blood type</label>
+      <select
+        class="form-control"
+        aria-label="Default select example"
+        name="bloodType"
+      >
+        <% let options = [ "AB+", "AB-", "A+", "A-", "B+", "B-","O+", "O-" ];
+        for ( let i = 0; i < options.length; i++ ) { let selected =
+        (oldInputs?.bloodType == options[i] ) ? "selected" : ""; %>
+        <option value="<%=options[ i ] %>" <%=selected %>
+          ><%=options[ i ] %>
+        </option>
+        <% } %>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label"
+        >Profile image</label
+      >
+      <div class="custom-file">
+        <input
+          type="file"
+          class="custom-file-input"
+          id="inputGroupFile01"
+          name="image"
+          accept="image/*"
+        />
+        <label class="custom-file-label" for="inputGroupFile01"
+          >select image</label
+        >
+      </div>
+      <% if (validationErr?.includes('fileErr')) { %>
+      <div class="alert alert-danger mt-2">Wrong file error</div>
+      <% } %>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Gender</label>
+      <div class="d-flex">
+        <div class="form-check mr-5">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="gender"
+            id="flexRadioDefault1"
+            value="Male"
+            checked
+          />
+          <label class="form-check-label" for="flexRadioDefault1"> Male </label>
+        </div>
+        <div class="form-check">
+          <input
+            class="form-check-input"
+            type="radio"
+            name="gender"
+            id="flexRadioDefault2"
+            value="Female"
+          />
+          <label class="form-check-label" for="flexRadioDefault2">
+            Female
+          </label>
+        </div>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary w-100 custom-btn">
+      Signup
+    </button>
+  </form>
+</div>
+<%- include('../layouts/footer.ejs') %>

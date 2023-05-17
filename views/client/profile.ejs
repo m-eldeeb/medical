@@ -1,0 +1,163 @@
+<%- include('../layouts/header-green.ejs') %>
+
+<div class="container">
+  <div class="main-body mb-5">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="card p-3">
+          <img
+            class="client-img"
+            src="http://localhost:3000/<%= session?.findUser.imageUrl%>"
+            alt=""
+          />
+          <ul class="list-unstyled list mt-3">
+            <li><span>Full Name: </span><%= session?.findUser.userName%></li>
+            <li><span>Email: </span><%= session?.findUser.email%></li>
+            <li><span>address: </span><%= session?.findUser.address%></li>
+            <li><span>phone: </span><%= session?.findUser.phone%></li>
+            <li><span>Blood type: </span><%= session?.findUser.BloodType%></li>
+            <li><span>gender: </span><%= session?.findUser.gender%></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-8">
+        <div class="p-3 card">
+          <h3 class="mb-3">Patient Complaint</h3>
+          <form action="/profile" method="post" class="client">
+            <div class="form-group">
+              <textarea
+                class="form-control"
+                id="exampleFormControlTextarea1"
+                rows="5"
+                name="complaint"
+                value="<%= complaint  %>"
+                placeholder="Write your complaint"
+              ></textarea>
+            </div>
+            <input
+              type="hidden"
+              name="user_id"
+              value="<%= session?.findUser._id  %>"
+            />
+
+            <div class="d-flex mb-3">
+              <input
+                class="btn btn-primary"
+                type="submit"
+                value="Get An Appointment"
+              />
+              <% if (status == 'sent') { %>
+              <span
+                class="d-flex align-items-center ml-2 fs-3 font-weight-bold"
+              >
+                Sent <i class="fa fa-check fa-2x ml-2" aria-hidden="true"></i>
+              </span>
+              <% } %>
+            </div>
+            <% if (catchErr) { %>
+            <div class="alert alert-danger"><%= catchErr %></div>
+            <% } %>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card mt-3 rounded">
+          <table class="table table-bordered text-center mb-0">
+            <thead>
+              <tr>
+                <th scope="col">#ID</th>
+                <th scope="col">Scheduled</th>
+                <th scope="col">Status</th>
+                <th scope="col">Complaint</th>
+                <th scope="col">Prescriptions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% for( let i = 0; i < patient?.appointments?.length; i++ ) {%>
+              <tr>
+                <td class="align-middle text-center"><%= i+1 %></td>
+                <% if (patient.appointments[i]?.scheduled) { %>
+                <td class="align-middle text-center">
+                  <p class="text-xs font-weight-bold mb-0">
+                    <%= patient.appointments[i]?.scheduled %>
+                  </p>
+                </td>
+                <% } else{ %>
+                <td class="align-middle text-center">
+                  <p class="text-xs font-weight-bold mb-0">---</p>
+                </td>
+                <% } %> <% if (patient.appointments[i]?.status) { %>
+                <td class="align-middle text-center">
+                  <p class="text-xs font-weight-bold mb-0">
+                    <%= patient.appointments[i]?.status%>
+                  </p>
+                </td>
+                <% } else{ %>
+                <td class="align-middle text-center">
+                  <p class="text-xs font-weight-bold mb-0">---</p>
+                </td>
+                <% } %>
+
+                <td class="align-middle text-center">
+                  <p class="text-xs font-weight-bold mb-0">
+                    <%= patient.appointments[i]?.complaint %>
+                  </p>
+                </td>
+
+                <td class="align-middle text-center">
+                  <% for( let j = 0; j < patient.appointments[i]?.prescriptions.length; j++ ) { %>
+                  <p class="text-xs font-weight-bold mb-0 text-left border p-1 m-1 ">
+                    <% const currentDate1 = new
+                    Date(patient.appointments[i]?.prescriptions[j].start_date);
+                    const currentDate2 = new
+                    Date(patient.appointments[i]?.prescriptions[j].end_date);
+                    const options = { year: 'numeric', month: 'numeric',
+                    day:'numeric' }; const startDate =
+                    currentDate1.toLocaleDateString(undefined, options); const
+                    endDate = currentDate2.toLocaleDateString(undefined,
+                    options); %>
+                   <span       class="bg-primary text-white p-2 d-inline-block mb-1 rounded-circle"> <%= j+1  %></span> <br>
+                    <span
+                      class="bg-primary text-white p-2 d-inline-block mb-1 rounded"
+                      >Medicine: <%=
+                      patient.appointments[i]?.prescriptions[j].medicine
+                      %></span
+                    >
+                    <span
+                      class="bg-primary text-white p-2 d-inline-block mb-1 rounded"
+                      >Dosage: <%=
+                      patient.appointments[i]?.prescriptions[j].dosage %></span
+                    >
+                    <span
+                      class="bg-primary text-white p-2 d-inline-block mb-1 rounded"
+                      >Frequency: <%=
+                      patient.appointments[i]?.prescriptions[j].frequency
+                      %></span
+                    >
+                    <span
+                      class="bg-primary text-white p-2 d-inline-block mb-1 rounded"
+                      >ٍStart Date: <%= startDate %></span
+                    >
+                    <span
+                      class="bg-primary text-white p-2 d-inline-block mb-1 rounded"
+                      >End Date: <%= endDate %></span
+                    >
+                  </p>
+
+                  <% } %>
+                </td>
+              </tr>
+
+              <% } %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include('../layouts/footer.ejs') %>

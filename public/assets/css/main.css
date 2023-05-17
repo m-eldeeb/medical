@@ -1,0 +1,80 @@
+body {
+  background-color: #62d2a2;
+}
+form {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  margin: auto;
+}
+
+.custom-btn {
+  background-color: #62d2a2;
+  border: none;
+}
+.custom-btn:hover {
+  background-color: #fff;
+  color: #62d2a2;
+  border: 1px solid #62d2a2;
+}
+body {
+  
+  color: #1a202c;
+
+}
+.main-body {
+  padding: 15px;
+}
+.card {
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 0 solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
+}
+.client-img {
+  width: 40%;
+  margin: auto;
+  border-radius: 50%;
+}
+.list {
+  margin-bottom: 0;
+}
+.list li {
+  padding: 10px 0;
+}
+.list li:last-child {
+  padding-bottom: 0;
+}
+.list li span {
+  text-transform: capitalize;
+  font-weight: bold;
+  width: 40%;
+  display: inline-block;
+}
+form.client {
+  padding: 0;
+  width: 100%;
+}
+
+.alert {
+  border-style: dashed;
+  border-width: 2px;
+  font-size: 18px;
+  font-weight: bold;
+  background-color: #f8d7da5c;
+}
+.show-password {
+  position: absolute;
+  right: 9px;
+  top: 60%;
+  font-size: 20px;
+}
