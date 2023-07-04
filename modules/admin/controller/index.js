@@ -9,7 +9,7 @@ const getIndex = async (req, res) => {
   const appointments = await appointmentModel.countDocuments();
   const labs = await labModel.countDocuments();
 
-  res.render("admin/dashboard", { doctors, patients, appointments, labs });
+  res.render("admin/dashboard", { doctors, patients, appointments, labs,session:req.session?.doctor?.userID });
 };
 
 module.exports = getIndex;

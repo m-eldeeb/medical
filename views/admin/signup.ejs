@@ -114,7 +114,6 @@
               <span class="nav-link-text ms-1">Inventory </span>
             </a>
           </li>
-    
         </ul>
       </div>
     </aside>
@@ -177,7 +176,9 @@
                 >
                   <div class="mb-3">
                     <% if (catchErr) { %>
-                    <div class="alert alert-danger text-white"><%= catchErr %></div>
+                    <div class="alert alert-danger text-white">
+                      <%= catchErr %>
+                    </div>
                     <% } %>
                   </div>
                   <div class="mb-3">
@@ -189,7 +190,9 @@
                   </div>
                   <div class="mb-3">
                     <% if (catchErr) { %>
-                    <div class="alert alert-danger text-white">Server Error</div>
+                    <div class="alert alert-danger text-white">
+                      Server Error
+                    </div>
                     <% } %>
                   </div>
 
@@ -205,7 +208,9 @@
                       value="<%= oldInputs?.userName  %>"
                     />
                     <% if (validationErr?.includes('userName')) { %>
-                    <div class="alert alert-danger text-white mt-2">in-valid userName</div>
+                    <div class="alert alert-danger text-white mt-2">
+                      in-valid userName
+                    </div>
                     <% } %>
                   </div>
                   <div class="mb-3">
@@ -220,7 +225,9 @@
                       value="<%= oldInputs?.email %>"
                     />
                     <% if (validationErr?.includes('email')) { %>
-                    <div class="alert alert-danger text-white mt-2">in-valid Email</div>
+                    <div class="alert alert-danger text-white mt-2">
+                      in-valid Email
+                    </div>
                     <% } %>
                   </div>
                   <div class="mb-3 position-relative">
@@ -277,35 +284,87 @@
                       value="<%= oldInputs?.phone  %>"
                     />
                     <% if (validationErr?.includes('phone')) { %>
-                    <div class="alert alert-danger text-white mt-2">in-valid Phone</div>
+                    <div class="alert alert-danger text-white mt-2">
+                      in-valid Phone
+                    </div>
                     <% } %>
                   </div>
                   <div class="mb-3">
                     <label for="exampleInputPhone" class="form-label"
-                      >Address</label
+                      >City</label
                     >
                     <input
                       type="text"
                       class="form-control"
                       id="exampleInputPhone"
-                      name="address"
-                      value="<%= oldInputs?.address  %>"
+                      name="city"
+                      value="<%= oldInputs?.city  %>"
                     />
-                    <% if (validationErr?.includes('address')) { %>
-                    <div class="alert alert-danger text-white mt-2">in-valid Address</div>
+                    <% if (validationErr?.includes('city')) { %>
+                    <div class="alert alert-danger text-white mt-2">
+                      in-valid city
+                    </div>
                     <% } %>
                   </div>
+
+                  <div class="mb-3">
+                    <label for="exampleInputArea" class="form-label"
+                      >Area</label
+                    >
+                    <select
+                      class="form-select"
+                      id="exampleInputArea"
+                      name="address"
+                    >
+                      <option value=""></option>
+                      <option value="Heliopolis">Heliopolis</option>
+                      <option value="Nasr-City">Nasr City</option>
+                      <option value="El-Maadi">El-Maadi</option>
+                      <option value="New-Cairo">New Cairo</option>
+                      <option value="El-Manyal">El-Manyal</option>
+                      <option value="Ain-Shams">Ain Shams</option>
+                      <option value="West-El-Balad ">West El-Balad</option>
+                      <option value="Shoubra">Shoubra</option>
+                      <option value="El-Abbasia">El-Abbasia</option>
+                      <option value="El-Kattameya">El-Kattameya</option>
+                    </select>
+
+                    <% if (validationErr?.includes('address')) { %>
+                    <div class="alert alert-danger text-white mt-2">
+                      in-valid Address
+                    </div>
+                    <% } %>
+                  </div>
+
                   <div class="mb-3">
                     <label for="exampleInputPhone" class="form-label"
                       >Specialization</label
                     >
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="exampleInputPhone"
-                      name="specialization"
-                      value="<%= oldInputs?.specialization  %>"
-                    />
+                    <select class="form-select" name="specialization">
+                      <option value=""></option>
+                      <option value="Dermatology-(Skin)">Dermatology (Skin)</option>
+                      <option value="Dentistry-(Teeth)">
+                        Dentistry (Teeth)
+                      </option>
+                      <option value="Neurology-(Brain & Nerves)">
+                        Neurology (Brain & Nerves)
+                      </option>
+                      <option value="Ear-Nose-throat">
+                        Ear, Nose and Throat
+                      </option>
+                      <option value="Chest-Respiratory">
+                        Chest and Respiratory
+                      </option>
+                      <option value="Audiology">Audiology</option>
+                      <option value="Orthopedics-(Bones)">
+                        Orthopedics (Bones)
+                      </option>
+                      <option value="Dietitian-Nutrition">
+                        Dietitian and Nutrition
+                      </option>
+                      <option value="Family-Medicine">Family Medicine</option>
+                    </select>
+
                     <% if (validationErr?.includes('specialization')) { %>
                     <div class="alert alert-danger text-white mt-2">
                       in-valid specialization
@@ -325,7 +384,9 @@
                       accept="image/*"
                     />
                     <% if (validationErr?.includes('fileErr')) { %>
-                    <div class="alert alert-danger text-white mt-2">Wrong file error</div>
+                    <div class="alert alert-danger text-white mt-2">
+                      Wrong file error
+                    </div>
                     <% } %>
                   </div>
 

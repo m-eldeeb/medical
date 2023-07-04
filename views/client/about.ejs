@@ -80,7 +80,16 @@
                 <li class="nav-item">
                   <a class="nav-link" href="/doctors">Doctors</a>
                 </li>
-                <% if (typeof session !== 'undefined' && session.user?.isLoggedIn) { %>
+                <% if (typeof session !== 'undefined' && session.user?.isLoggedIn == true) { %>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/doctors/appointments">
+                      <i
+                        class="fa fa-stethoscope font-weight-bold mr-1"
+                        aria-hidden="true"
+                      ></i
+                      >Book Appointment</a
+                    >
+                  </li>
                   <li class="nav-item">
                     <a class="nav-link" href="/profile">
                       <i
@@ -99,25 +108,27 @@
                       >Logout</a
                     >
                   </li>
+              
+               
                   <% } else { %>
-                  <li class="nav-item">
-                    <a class="nav-link" href="/signup">
-                      <i
-                        class="fa fa-user font-weight-bold mr-1"
-                        aria-hidden="true"
-                      ></i
-                      >Sign Up</a
-                    >
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="/login"
-                      ><i
-                        class="fa fa-sign-in font-weight-bold mr-1"
-                        aria-hidden="true"
-                      ></i
-                      >Login</a
-                    >
-                  </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="/signup">
+                        <i
+                          class="fa fa-user font-weight-bold mr-1"
+                          aria-hidden="true"
+                        ></i
+                        >Sign Up</a
+                      >
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="/login"
+                        ><i
+                          class="fa fa-sign-in font-weight-bold mr-1"
+                          aria-hidden="true"
+                        ></i
+                        >Login</a
+                      >
+                    </li>
                   <% } %>
               </ul>
             </div>

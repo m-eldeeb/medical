@@ -20,46 +20,6 @@
           </ul>
         </div>
       </div>
-      <div class="col-md-8">
-        <div class="p-3 card">
-          <h3 class="mb-3">Patient Complaint</h3>
-          <form action="/profile" method="post" class="client">
-            <div class="form-group">
-              <textarea
-                class="form-control"
-                id="exampleFormControlTextarea1"
-                rows="5"
-                name="complaint"
-                value="<%= complaint  %>"
-                placeholder="Write your complaint"
-              ></textarea>
-            </div>
-            <input
-              type="hidden"
-              name="user_id"
-              value="<%= session?.findUser._id  %>"
-            />
-
-            <div class="d-flex mb-3">
-              <input
-                class="btn btn-primary"
-                type="submit"
-                value="Get An Appointment"
-              />
-              <% if (status == 'sent') { %>
-              <span
-                class="d-flex align-items-center ml-2 fs-3 font-weight-bold"
-              >
-                Sent <i class="fa fa-check fa-2x ml-2" aria-hidden="true"></i>
-              </span>
-              <% } %>
-            </div>
-            <% if (catchErr) { %>
-            <div class="alert alert-danger"><%= catchErr %></div>
-            <% } %>
-          </form>
-        </div>
-      </div>
     </div>
 
     <div class="row">
@@ -79,10 +39,15 @@
               <% for( let i = 0; i < patient?.appointments?.length; i++ ) {%>
               <tr>
                 <td class="align-middle text-center"><%= i+1 %></td>
-                <% if (patient.appointments[i]?.scheduled) { %>
-                <td class="align-middle text-center">
-                  <p class="text-xs font-weight-bold mb-0">
-                    <%= patient.appointments[i]?.scheduled %>
+                <% if (patient.appointments[i]?.date) { %>
+                <td class="align-middle text-left">
+                  <p class="text-xs font-weight-bold mb-1 border p-1 rounded">
+                    <span class="w-25 d-inline-block text-left">Date:</span> <%=
+                    patient.appointments[i]?.date %>
+                  </p>
+                  <p class="text-xs font-weight-bold mb-0 border p-1 rounded">
+                    <span class="w-25 d-inline-block text-left">Time:</span><%=
+                    patient.appointments[i]?.time %>
                   </p>
                 </td>
                 <% } else{ %>
@@ -108,8 +73,11 @@
                 </td>
 
                 <td class="align-middle text-center">
-                  <% for( let j = 0; j < patient.appointments[i]?.prescriptions.length; j++ ) { %>
-                  <p class="text-xs font-weight-bold mb-0 text-left border p-1 m-1 ">
+                  <% for( let j = 0; j <
+                  patient.appointments[i]?.prescriptions.length; j++ ) { %>
+                  <p
+                    class="text-xs font-weight-bold mb-0 text-left border p-1 m-1"
+                  >
                     <% const currentDate1 = new
                     Date(patient.appointments[i]?.prescriptions[j].start_date);
                     const currentDate2 = new
@@ -119,7 +87,12 @@
                     currentDate1.toLocaleDateString(undefined, options); const
                     endDate = currentDate2.toLocaleDateString(undefined,
                     options); %>
-                   <span       class="bg-primary text-white p-2 d-inline-block mb-1 rounded-circle"> <%= j+1  %></span> <br>
+                    <span
+                      class="bg-primary text-white p-2 d-inline-block mb-1 rounded-circle"
+                    >
+                      <%= j+1 %></span
+                    >
+                    <br />
                     <span
                       class="bg-primary text-white p-2 d-inline-block mb-1 rounded"
                       >Medicine: <%=

@@ -127,7 +127,6 @@
               <span class="nav-link-text ms-1">Inventory </span>
             </a>
           </li>
-     
         </ul>
       </div>
     </aside>
@@ -192,12 +191,17 @@
                       >
                         Scheduled
                       </th>
-
+                      <th
+                      class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                    >
+                      Doctor Name
+                    </th>
                       <th
                         class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
                       >
                         Patient Name
                       </th>
+                     
                       <th
                         class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
                       >
@@ -209,20 +213,28 @@
                         Appointment
                       </th>
 
-                      <th class="text-secondary opacity-7"></th>
+                      <th
+                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
+                      >
+                        Options
+                      </th>
                     </tr>
                   </thead>
                   <tbody>
                     <% for( let i = 0; i < appointments?.length; i++ ) { %>
                     <tr>
                       <td><%= i+1 %></td>
-
-           
-                       <% if (appointments[i]?.scheduled) { %>
+                      <% var t = appointments[i]?.time; let hour =
+                      parseInt(t.substring(0, 2)); let minute = t.substring(3,
+                      5); let period = hour >= 12 ? 'PM' : 'AM'; hour = hour %
+                      12 || 12; let tt = hour + ':' + minute + ' ' + period; %>
+                      <% if (appointments[i]?.date) { %>
                       <td class="align-middle text-center">
                         <span class="text-xs font-weight-bold"
-                          ><%= appointments[i]?.scheduled %></span
+                          ><%= appointments[i]?.date %></span
                         >
+                        <br />
+                        <span class="text-xs font-weight-bold"><%= tt %></span>
                       </td>
                       <% } else{ %>
                       <td class="align-middle text-center">
@@ -232,7 +244,12 @@
 
                       <td>
                         <p class="text-xs font-weight-bold mb-0">
-                          <%= appointments[i]?.patient_id.userName %>
+                          <%= appointments[i]?.doctor_id?.name %>
+                        </p>
+                      </td>
+                      <td>
+                        <p class="text-xs font-weight-bold mb-0">
+                          <%= appointments[i]?.patient_id?.userName %>
                         </p>
                       </td>
 

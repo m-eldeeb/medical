@@ -6,6 +6,7 @@ const doctorSchema = new mongoose.Schema(
     email: { type: String, required: true },
     password: { type: String, required: true },
     phone: String,
+    city:String,
     address: String,
     imageUrl: String,
     role: { type: String, default: "Doctor" },
@@ -15,7 +16,7 @@ const doctorSchema = new mongoose.Schema(
     },
     specialization: String,
     patients: [{ type: mongoose.Schema.Types.ObjectId, ref: "Patient" }],
-    
+    appointments:[{ type: mongoose.Schema.Types.ObjectId, ref: "Appointment" }]
   },
   { timestamps: true }
 );

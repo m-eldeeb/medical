@@ -225,96 +225,102 @@
                         Phone
                       </th>
 
-                      <th
-                        class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
-                      >
-                        Employed
-                      </th>
+                    
                       <th
                         class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
                       >
                         Profile
                       </th>
-                      <th class="text-secondary opacity-7"></th>
+                      <th
+                      class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
+                    >
+                      Make appointments
+                    </th>
+                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Options</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <% for( let i = 0; i < doctors?.length; i++ ) { %>
-                    <tr>
-                      <td><%= i+1 %></td>
-                      <td>
-                        <div class="d-flex py-1">
-                          <div>
-                            <img
-                              src="http://localhost:3000/<%= doctors[i]?.imageUrl%>"
-                              class="avatar avatar-lg me-3"
-                            />
-                          </div>
-                          <div
-                            class="d-flex flex-column justify-content-center"
-                          >
-                            <h6 class="mb-1 text-xs"><%= doctors[i]?.name %></h6>
-                            <p class="text-xs text-secondary mb-0">
-                              <%= doctors[i]?.email %>
-                            </p>
-                          </div>
+                 <% for( let i = 0; i < doctors.length; i++ ) { %>
+                  <tr>
+                    <td><%= i+1  %></td>
+                    <td>
+                      <div class="d-flex">
+                        <div>
+                          <img
+                            src="http://localhost:3000/<%= doctors[i]?.imageUrl%>"
+                            class="avatar avatar-lg me-3"
+                          />
                         </div>
-                      </td>
-
-                      <td>
-                        <p class="text-xs font-weight-bold mb-0">
-                          <%= doctors[i]?.specialization %>
-                        </p>
-                      </td>
-
-                      <td>
-                        <p class="text-xs font-weight-bold mb-0">
-                          <%= doctors[i]?.phone %>
-                        </p>
-                      </td>
-
-                      <% const currentDate = new Date(doctors[i]?.createdAt);
-                      const options = { year: 'numeric', month: 'numeric', day:
-                      'numeric' }; const shortDateFormat =
-                      currentDate.toLocaleDateString(undefined, options); %>
-                      <td class="align-middle text-center">
-                        <span class="text-xs font-weight-bold"
-                          ><%= shortDateFormat %></span
+                        <div
+                          class="d-flex flex-column justify-content-center"
                         >
-                      </td>
-                      <td class="align-middle text-center">
-                        <a
-                          href="/admin/doctors/<%= doctors[i]?._id  %>/profile"
-                          class="text-xs btn mb-0"
-                          data-toggle="tooltip"
-                          data-original-title="Edit user"
-                        >
-                          View
-                          <i class="far fa-eye"></i>
-                        </a>
-                      </td>
+                          <h6 class="mb-1 text-xs"><%= doctors[i]?.name %></h6>
+                          <p class="text-xs text-secondary mb-0">
+                            <%= doctors?.email %>
+                          </p>
+                        </div>
+                      </div>
+                    </td>
 
-                      <td class="align-middle">
-                        <a
-                          href="/admin/doctors/<%= doctors[i]?._id  %>/edit"
-                          class="text-xs btn mb-0"
-                          data-toggle="tooltip"
-                          data-original-title="Edit user"
-                        >
-                          Edit
-                        </a>
-                        <a
-                          href="/admin/doctors/<%= doctors[i]?._id  %>"
-                          class="text-white text-xs btn btn-danger mb-0 delete-confirmation"
-                          data-toggle="tooltip"
-                          data-original-title="Delete user"
-                          data-id="<%= doctors[i]?._id  %>"
-                        >
-                          Delete
-                        </a>
-                      </td>
-                    </tr>
-                    <% } %>
+                    <td>
+                      <p class="text-xs font-weight-bold mb-0">
+                        <%= doctors[i]?.specialization %>
+                      </p>
+                    </td>
+
+                    <td>
+                      <p class="text-xs font-weight-bold mb-0">
+                        <%= doctors[i]?.phone %>
+                      </p>
+                    </td>
+
+                  
+                    <td class="align-middle text-center">
+                      <a
+                        href="/admin/doctors/<%= doctors[i]?._id  %>/profile"
+                        class="text-xs btn mb-0"
+                        data-toggle="tooltip"
+                        data-original-title="Edit user"
+                      >
+                        View
+                        <i class="far fa-eye"></i>
+                      </a>
+                    </td>
+                    <td class="align-middle text-center">
+                      <a
+                        href="/admin/doctors/<%= doctors[i]?._id  %>/add-appointment"
+                        class="text-xs btn mb-0"
+                        data-toggle="tooltip"
+                        data-original-title="Edit user"
+                      >
+                        Make Appointment
+                       
+                      </a>
+                    </td>
+
+                    <td class="align-middle">
+                      <a
+                        href="/admin/doctors/<%= doctors[i]?._id  %>/edit"
+                        class="text-xs btn mb-0"
+                        data-toggle="tooltip"
+                        data-original-title="Edit user"
+                      >
+                        Edit
+                      </a>
+                      <a
+                        href="/admin/doctors/<%= doctors[i]?._id  %>"
+                        class="text-white text-xs btn btn-danger mb-0 delete-confirmation"
+                        data-toggle="tooltip"
+                        data-original-title="Delete user"
+                        data-id="<%= doctors?._id  %>"
+                      >
+                        Delete
+                      </a>
+                    </td>
+                  </tr>
+                 <% } %>
+                  
+                   
                   </tbody>
                 </table>
               </div>

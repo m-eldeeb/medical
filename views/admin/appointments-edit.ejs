@@ -135,7 +135,6 @@
               <span class="nav-link-text ms-1">Inventory </span>
             </a>
           </li>
-       
         </ul>
       </div>
     </aside>
@@ -188,24 +187,24 @@
             <div class="card p-2">
               <img
                 class="border-radius-lg w-50"
-                src="http://localhost:3000/<%= appointment?.patient_id.imageUrl%>"
+                src="http://localhost:3000/<%= appointment?.patient_id?.imageUrl%>"
                 alt=""
               />
               <ul class="list-unstyled list mt-3">
                 <li class="mb-2">
                   <span class="text-xl fw-bold w-30 d-inline-block"
                     >Full Name: </span
-                  ><%= appointment?.patient_id.userName%>
+                  ><%= appointment?.patient_id?.userName%>
                 </li>
                 <li class="mb-2">
                   <span class="text-xl fw-bold w-30 d-inline-block"
                     >Blood type: </span
-                  ><%= appointment?.patient_id.BloodType%>
+                  ><%= appointment?.patient_id?.BloodType%>
                 </li>
                 <li class="mb-2">
                   <span class="text-xl fw-bold w-30 d-inline-block"
                     >Gender: </span
-                  ><%= appointment?.patient_id.gender%>
+                  ><%= appointment?.patient_id?.gender%>
                 </li>
               </ul>
             </div>
@@ -243,62 +242,7 @@
           </div>
         </div>
 
-        <div class="row">
-          <div class="col-md-12 mb-3">
-            <div class="card">
-              <div class="card-body">
-                <div class="d-flex justify-content-between">
-                  <h3>Lab Tests</h3>
-                  <% if(sendTest) {%>
-                  <div
-                    class="d-flex align-items-center justify-content-center flex-row"
-                  >
-                    <span class="fw-bold me-1 fs-4">Sent</span>
-                    <i
-                      class="fas fa-check border rounded-circle fs-5 p-2 d-flex align-items-center"
-                    ></i>
-                  </div>
-
-                  <%}%>
-                </div>
-                <hr class="horizontal dark mb-4" />
-                <form
-                  action="/admin/appointments/<%= appointment._id  %>/details/result"
-                  method="post"
-                >
-                  <input
-                    type="hidden"
-                    name="patientName"
-                    value="<%= appointment?.patient_id.userName%>"
-                  />
-                  <div class="mb-3">
-                    Add New Test
-                    <i class="fas fa-plus-circle add" id="add-result"></i>
-                  </div>
-                  <div id="Row">
-                    <div class="mb-3 border p-2" id="inputFormRow">
-                      <label for="test" class="form-label">Test Name</label>
-                      <i class="fas fa-minus-circle minus" id="remove"></i>
-                      <input
-                        type="text"
-                        class="form-control"
-                        id="test"
-                        name="testName[]"
-                        placeholder="example: Blood glucose"
-                        value=""
-                      />
-                    </div>
-                  </div>
-
-                  <button type="submit" class="btn btn-primary w-100">
-                    Send Test
-                  </button>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-
+        
         <div class="row">
           <div class="col-md-12">
             <div class="card">
@@ -325,17 +269,16 @@
                 >
                   <div class="mb-3">
                     <label for="exampleInputPhone" class="form-label"
-                      >Appointment Date</label
+                      >patient complaint</label
                     >
-                    <input
-                      type="date"
+                    <textarea
                       class="form-control"
-                      id="exampleInputPhone"
-                      name="appointmentDate"
-                      value=""
-                    />
+                      id="exampleFormControlTextarea1"
+                      rows="3"
+                      name="complaint"
+                      
+                    ></textarea>
                   </div>
-
                   <div class="mb-3">
                     <label for="exampleInputPhone" class="form-label"
                       >Appointment Status</label
@@ -438,6 +381,64 @@
             </div>
           </div>
         </div>
+
+        <div class="row">
+          <div class="col-md-12 my-3">
+            <div class="card">
+              <div class="card-body">
+                <div class="d-flex justify-content-between">
+                  <h3>Lab Tests</h3>
+                  <% if(sendTest) {%>
+                  <div
+                    class="d-flex align-items-center justify-content-center flex-row"
+                  >
+                    <span class="fw-bold me-1 fs-4">Sent</span>
+                    <i
+                      class="fas fa-check border rounded-circle fs-5 p-2 d-flex align-items-center"
+                    ></i>
+                  </div>
+
+                  <%}%>
+                </div>
+                <hr class="horizontal dark mb-4" />
+                <form
+                  action="/admin/appointments/<%= appointment._id  %>/details/result"
+                  method="post"
+                >
+                  <input
+                    type="hidden"
+                    name="patientName"
+                    value="<%= appointment?.patient_id?.userName%>"
+                  />
+                  <div class="mb-3">
+                    Add New Test
+                    <i class="fas fa-plus-circle add" id="add-result"></i>
+                  </div>
+                  <div id="Row">
+                    <div class="mb-3 border p-2" id="inputFormRow">
+                      <label for="test" class="form-label">Test Name</label>
+                      <i class="fas fa-minus-circle minus" id="remove"></i>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="test"
+                        name="testName[]"
+                        placeholder="example: Blood glucose"
+                        value=""
+                      />
+                    </div>
+                  </div>
+
+                  <button type="submit" class="btn btn-primary w-100">
+                    Send Test
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
       </div>
     </main>
 

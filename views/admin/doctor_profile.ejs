@@ -127,7 +127,6 @@
               <span class="nav-link-text ms-1">Inventory </span>
             </a>
           </li>
-  
         </ul>
       </div>
     </aside>
@@ -237,33 +236,60 @@
               </div>
             </div>
           </div>
-          <!-- <div class="col-xl-12 col-sm-12 mb-xl-0 ">
-            <div class="row">
-              <div class="col-md-6">
-                <div class="card">
-                  <div class="card-header p-3 mx-3 mt-3 position-relative z-index-1">
-                    <a href="javascript:;" class="d-block">
-                      <img src="/assets/images/client.jpg" class="img-fluid border-radius-lg w-50">
-                    </a>
-                  </div>
+        </div>
+        <div class="row mb-3">
+          <div class="card">
+            <h3 class="p-2">Appointments Available</h3>
+            <div class="card-body d-flex flex-wrap gap-2">
+              <% for( let index = 0; index < doctor?.appointments?.length;
+              index++ ) { %>
+              <div
+                class="box border border-1 w-30 p-2 rounded position-relative"
+              >
+                <h5>
+                  <i class="fas fa-calendar-alt"></i> Date:
+                  <span><%= doctor?.appointments[index]?.date %></span>
+                </h5>
+
+                <% const options = { weekday: 'long' }; const date = new
+                Date(doctor?.appointments[index]?.date).toLocaleDateString('en-US',
+                options) %>
+
+                <h5>
+                  <i class="fas fa-calendar-day"></i> Day:
+                  <span><%= date %></span>
+                </h5>
+                <% var t = doctor?.appointments[index]?.time; let hour =
+                parseInt(t.substring(0, 2)); let minute = t.substring(3, 5); let
+                period = hour >= 12 ? 'PM' : 'AM'; hour = hour % 12 || 12; let
+                tt = hour + ':' + minute + ' ' + period; %>
+                <h5>
+                  <i class="far fa-clock"></i>
+                  <span>Time: <%= tt %></span>
+                </h5>
+
+                <i
+                  class="far fa-times-circle position-absolute bottom-0 end-0 fs-4 m-1 cursor-pointer delAppointment"
+                  data-id="<%= doctor?.appointments[index]?._id%> "
+                ></i>
+
+                <% if(doctor?.appointments[index]?.status) {%>
+                <p
+                  class="position-absolute top-0 end-0 bg-primary p-2 text-white"
+                >
+                  <%= doctor?.appointments[index]?.status%>
+                </p>
+                <%}else {%>
+                <p
+                  class="position-absolute top-0 end-0 bg-primary p-2 text-white"
+                >
+                  ...
+                </p>
+                <%}%>
               </div>
-              <div class="col-md-6">
-                <div class="card">
-                  <div class="card-body p-3">                    
-                          
-                          <ul class="list-unstyled list mt-3">
-                            <li><span>Full Name: </span>mohamed</li>
-                            <li><span>Email: </span>momo96@gmail.com</li>
-                            <li><span>address: </span>momo96@gmail.com</li>
-                            <li><span>phone: </span>012348225</li>
-                            <li><span>Blood type: </span>O+</li>
-                            <li><span>gender: </span>Male</li>
-                          </ul>
-                        </div>
-                </div>
-              </div>
+              <% } %>
             </div>
-            -->
+          </div>
         </div>
 
         <div class="row mb-3">
@@ -479,6 +505,7 @@
     ></script>
     <script src="/assets/js/argon-dashboard.min.js"></script>
     <script src="/assets/js/sweetalert2.all.min.js"></script>
+    <script type="text/javascript" src="/assets/js/fancybox.umd.js"></script>
     <script src="/assets/js/custom.js"></script>
   </body>
 </html>

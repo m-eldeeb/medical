@@ -55,4 +55,4 @@ function myMulter(customPath, customValidation) {
   return upload;
 }
 
-module.exports = { myMulter, fileValidation };
+module.exports = {  };

@@ -197,7 +197,7 @@
                 <div class="p-2">
                   <img
                     class="border-radius-lg w-100 rounded-circle"
-                    src="http://localhost:3000/<%= appointment?.patient_id.imageUrl%>"
+                    src="http://localhost:3000/<%= appointment?.patient_id?.imageUrl%>"
                     alt=""
                   />
                 </div>
@@ -212,19 +212,19 @@
                       <div class="mt-3">
                         <p class="mb-0 fw-bold fs-5">Full Name</p>
                         <span class="lead"
-                          ><%= appointment?.patient_id.userName%></span
+                          ><%= appointment?.patient_id?.userName%></span
                         >
                       </div>
                       <div class="mt-3">
                         <p class="mb-0 fw-bold fs-5">Blood Type</p>
                         <span class="lead"
-                          ><%= appointment?.patient_id.BloodType%></span
+                          ><%= appointment?.patient_id?.BloodType%></span
                         >
                       </div>
                       <div class="mt-3">
                         <p class="mb-0 fw-bold fs-5">Gender</p>
                         <span class="lead"
-                          ><%= appointment?.patient_id.gender%></span
+                          ><%= appointment?.patient_id?.gender%></span
                         >
                       </div>
                     </div>
@@ -343,9 +343,9 @@
                 <h3>Tests Results</h3>
                 <hr class="horizontal dark mb-3" />
                 <p class="fw-bold fs-5">
-                  Status: <%= appointment?.lab_id.status %>
+                  Status: <%= appointment?.lab_id?.status %>
                 </p>
-                <% if (!appointment?.lab_id.tests.length ) { %>
+                <% if (!appointment?.lab_id?.tests.length ) { %>
                   <div class="d-flex border p-2 rounded">
                     No Tests To show
                     </div>

@@ -315,11 +315,53 @@ $(document).ready(function () {
     $("#newRow").append(html);
   });
 
+  $("#add-2").click(function () {
+    let html = `     <div
+    class="d-flex border border-1 p-2 w-30 flex-wrap rounded-2"
+    id="inputFormRow"
+  >
+    <div class="me-2 mb-3">
+      <label for="appointment_date" class="form-label"
+        >Add Date</label
+      >
+      <input
+        type="date"
+        class="form-control"
+        id="appointment_date"
+        name="date[]"
+        value=""
+      />
+    </div>
+    <div class="me-2">
+      <label for="time" class="form-label">Pick Time</label>
+      <input
+        type="time"
+        class="form-control"
+        id="time"
+        name="time[]"
+        value=""
+      />
+    </div>
+    <div class="w-5 d-flex align-items-center ms-5">
+      <i
+        class="fas fa-minus-circle d-inline-block ms-5 mt-5 minus"
+        id="removeRow"
+      ></i>
+    </div>
+  </div>
+    
+  `;
+
+    $("#newRow2").append(html);
+  });
   // remove row
   $(document).on("click", "#removeRow", function () {
     $(this).closest("#inputFormRow").remove();
   });
 
+  //////////////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////////////////////////////////
   const input = document.querySelector(".input-img");
   const image = document.querySelector(".imgPreview");
 
@@ -348,11 +390,76 @@ $(document).ready(function () {
   increase.on("click", function () {
     let value = parseInt(quantity.val());
     quantity.val(value + 1);
-
   });
   decrease.on("click", function () {
     let value = parseInt(quantity.val());
-    quantity.val(value -1);
+    quantity.val(value - 1);
+  });
+
+
+  $("button#book").on("click", function (e) {
+    e.preventDefault();
+    // get the ID of the item to delete from the data-id attribute
+    var id = $(this).data("id");
+
+    // display a confirmation dialog box using SweetAlert2
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You will not be able to recover this item!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, book it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // make an AJAX call to delete the item
+        $.ajax({
+          url: "/doctors/appointments/details/" + id,
+          type: "POST",
+          success: function (result) {
+            // do something with the result
+          },
+          error: function (err) {
+            // handle the error
+          },
+        });
+        location.reload();
+      }
+    });
+  });
+
+
+  $(".delAppointment").on("click", function (e) {
+    e.preventDefault();
+    // get the ID of the item to delete from the data-id attribute
+    var id = $(this).data("id");
+    console.log(id);
+    // display a confirmation dialog box using SweetAlert2
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You will not be able to recover this item!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // make an AJAX call to delete the item
+        $.ajax({
+          url: "/admin/doctors/appointments/" + id,
+          type: "DELETE",
+          success: function (result) {
+            // do something with the result
+          },
+          error: function (err) {
+            // handle the error
+          },
+        });
+        location.reload();
+      }
+    });
 
   });
 

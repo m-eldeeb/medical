@@ -133,8 +133,6 @@
               <span class="nav-link-text ms-1">Inventory </span>
             </a>
           </li>
-      
-       
         </ul>
       </div>
     </aside>
@@ -178,146 +176,28 @@
       </nav>
       <!-- End Navbar -->
       <div class="container-fluid">
-        <div class="row offset-1">
-          <div class="col-md-2">
-            <h3 class="mb-3 card text-center">UPDATE</h3>
+        <div class="row">
+          <div class="col-md-4">
+            <h3 class="mb-3 card text-center">Add Appointments</h3>
           </div>
         </div>
 
-        <!-- sign up fooooooorm -->
+        <!-- add appointment fooooooorm -->
         <div class="row mt-4 mb-3">
-          <div class="col-md-10 offset-1">
-            <div class="card">
-              <div class="card-body">
-                <form
-                  class="box"
-                  action="/admin/doctors/<%= doctor?._id %>/edit"
-                  method="post"
-                  enctype="multipart/form-data"
+          <div class="col-md-12">
+            <div class="card p-3">
+              <% if (saved ) { %>
+              <p class="fw-bold ms-auto fs-4">Saved</p>
+              <% } %>
+              <div class="mb-3">
+                <label for="exampleInputPhone" class="form-label me-1 fs-6"
+                  >Add Appointments</label
                 >
-                  <div class="mb-3">
-                    <% if (catchErr) { %>
-                    <div class="alert alert-danger text-white">
-                      <%= catchErr %>
-                    </div>
-                    <% } %>
-                  </div>
-                  <div class="mb-3">
-                    <% if (userExist) { %>
-                    <div class="alert alert-danger text-white">invalid id</div>
-                    <% } %>
-                  </div>
-                  <div class="mb-3 position-relative">
-                    <label for="exampleInputText" class="form-label"
-                      >Username</label
-                    >
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="exampleInputText"
-                      name="userName"
-                      value="<%= doctor?.name  %>"
-                    />
-                    <% if (validationErr?.includes('userName')) { %>
-                    <div class="alert alert-danger text-white mt-2">
-                      userName can't be empty
-                    </div>
-                    <% } %>
-                  </div>
-                  <div class="mb-3">
-                    <label for="exampleInputPhone" class="form-label"
-                      >phone</label
-                    >
-                    <input
-                      type="tel"
-                      class="form-control"
-                      id="exampleInputPhone"
-                      name="phone"
-                      value="<%= doctor?.phone  %>"
-                    />
-                    <% if (validationErr?.includes('phone')) { %>
-                    <div class="alert alert-danger text-white mt-2">
-                      Phone can't be empty
-                    </div>
-                    <% } %>
-                  </div>
-                  <div class="mb-3">
-                    <label for="exampleInputPhone" class="form-label"
-                      >City</label
-                    >
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="exampleInputPhone"
-                      name="city"
-                      value="<%= doctor?.city  %>"
-                    />
-                    <% if (validationErr?.includes('city')) { %>
-                    <div class="alert alert-danger text-white mt-2">in-valid city</div>
-                    <% } %>
-                  </div>
-                  <div class="mb-3">
-                    <label for="exampleInputPhone" class="form-label"
-                      >Area</label
-                    >
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="exampleInputPhone"
-                      name="address"
-                      value="<%= doctor?.address  %>"
-                    />
-                    <% if (validationErr?.includes('address')) { %>
-                    <div class="alert alert-danger text-white mt-2">
-                      Address can't be empty
-                    </div>
-                    <% } %>
-                  </div>
+                <i class="fas fa-plus-circle add" id="add-2"></i>
+                <form action="" method="post">
+                  <div id="newRow2" class="d-flex flex-wrap gap-2"></div>
 
-                  <div class="mb-3">
-                    <label for="exampleInputPhone" class="form-label"
-                      >Specialization</label
-                    >
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="exampleInputPhone"
-                      name="specialization"
-                      value="<%= doctor?.specialization  %>"
-                    />
-                    <% if (validationErr?.includes('specialization')) { %>
-                    <div class="alert alert-danger text-white mt-2">
-                      specialization Address can't be empty
-                    </div>
-                    <% } %>
-                  </div>
-
-                  <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label"
-                      >Profile image</label
-                    >
-                    <input
-                      class="form-control input-img"
-                      type="file"
-                      id="formFile"
-                      name="image"
-                      accept="image/*"
-                    />
-                    <% if (validationErr?.includes('fileErr')) { %>
-                    <div class="alert alert-danger text-white mt-2">
-                      Wrong file error
-                    </div>
-                    <% } %>
-                  </div>
-                  <div class="mb-3">
-                    <img
-                      src="/<%= doctor?.imageUrl  %>"
-                      data-fancybox
-                      alt=""
-                      class="w-25 border rounded-1 imgPreview"
-                    />
-                  </div>
-                  <button type="submit" class="btn btn-primary w-100">
+                  <button type="submit" class="btn btn-primary w-100 mb-0 mt-2">
                     Save
                   </button>
                 </form>

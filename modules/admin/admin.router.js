@@ -22,6 +22,9 @@ const {
   update,
   deleteDoctor,
   getProfile,
+  makeAppointments,
+  makeAppointmentss,
+  deleteAppoint,
 } = require("./controller/doctors");
 const {
   inventoryPage,
@@ -66,6 +69,8 @@ router.post(
 router.get("/admin/doctors/signin", getSignin);
 router.post("/admin/doctors/signin", validation(signinShema, "signin"), signin);
 router.get("/admin/doctors/:id/edit", getUpdate);
+router.get("/admin/doctors/:id/add-appointment", makeAppointments);
+router.post("/admin/doctors/:id/add-appointment", makeAppointmentss);
 router.post(
   "/admin/doctors/:id/edit",
   myMulter("doctors/profileImages", fileValidation.image).single("image"),
@@ -75,6 +80,8 @@ router.post(
 
 router.delete("/admin/doctors/:id", deleteDoctor);
 router.get("/admin/doctors/:id/profile", getProfile);
+
+router.delete("/admin/doctors/appointments/:id", deleteAppoint);
 
 // patients
 router.get("/admin/patients", backAuth(), patientsPage);

@@ -36,15 +36,12 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/uploads", express.static(path.join(__dirname, "./uploads")));
 
 // view engine
-app.use(express.json())
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
 
-
 // routes
 app.use(adminRouter, clientRouter, authRouter);
-
-
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 

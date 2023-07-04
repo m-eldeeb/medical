@@ -1,10 +1,12 @@
 const doctorModel = require("../../../DB/model/Doctors");
+const appointmentModel = require("../../../DB/model/Appointment");
 const bcrypt = require("bcryptjs");
 const fs = require("fs");
 const path = require("path");
 
 const doctorsPage = async (req, res) => {
-  const doctors = await doctorModel.find({}).select("-password -role -gender");
+  const doctors = await doctorModel.find().select("-password -role -gender");
+
   res.render("admin/doctors", { doctors, title: "Doctors" });
 };
 
@@ -43,6 +45,7 @@ const signup = async (req, res) => {
         specialization,
         gender,
         address,
+        city,
       } = req.body;
       const imageUrl = `${req.fileDestination}/${req.file.filename}`;
       const user = await doctorModel.findOne({ email });
@@ -65,6 +68,7 @@ const signup = async (req, res) => {
           specialization,
           address,
           imageUrl,
+          city,
         });
         const savedUser = await newUser.save();
         res.redirect("/admin/doctors/signin");
@@ -155,7 +159,7 @@ const update = async (req, res) => {
       req.flash("fileErr", true);
       res.redirect("/edit");
     } else {
-      const { userName, phone, specialization, address } = req.body;
+      const { userName, phone, specialization, address, city } = req.body;
       const imageUrl = `${req.fileDestination}/${req.file.filename}`;
 
       const user = await doctorModel.findById(req.params.id);
@@ -185,9 +189,9 @@ const update = async (req, res) => {
             });
           }
         });
-         await doctorModel.findOneAndUpdate(
+        await doctorModel.findOneAndUpdate(
           { _id: req.params.id },
-          { name: userName, phone, specialization, address, imageUrl },
+          { name: userName, phone, specialization, address, imageUrl, city },
           { new: true }
         );
         res.redirect(`/admin/doctors`);
@@ -201,7 +205,7 @@ const update = async (req, res) => {
 
 const deleteDoctor = async (req, res) => {
   try {
-     await doctorModel.findByIdAndDelete({ _id: req.params.id });
+    await doctorModel.findByIdAndDelete({ _id: req.params.id });
     res.redirect("admin/doctors");
   } catch (error) {
     console.log(error);
@@ -209,11 +213,55 @@ const deleteDoctor = async (req, res) => {
 };
 
 const getProfile = async (req, res) => {
-  const doctor = await doctorModel.findById(req.params.id).populate("patients");
+  const doctor = await doctorModel
+    .findById(req.params.id)
+    .populate("patients")
+    .populate("appointments");
+
   res.render("admin/doctor_profile", { doctor, title: "Doctor Profile" });
 };
 
+const deleteAppoint = async (req, res) => {
+  await appointmentModel.findByIdAndDelete(req.params.id, { new: true });
+  res.redirect(req.get("referer"));
+};
 
+const makeAppointments = async (req, res) => {
+  const doctor = await doctorModel.findById(req.params.id);
+  const saved = req.flash("saved")[0];
+  res.render("admin/add-appointment", {
+    doctor: doctor,
+    title: "Add Appointments",
+    saved,
+  });
+};
+
+const makeAppointmentss = async (req, res) => {
+  try {
+    const { date, time } = req.body;
+    // console.log(date, time);
+
+    const appointments = date.map((med, index) => ({
+      date: date[index],
+      time: time[index],
+      doctor_id: req.params.id,
+    }));
+
+    // console.log(appointments);
+
+    const test = await appointmentModel.insertMany(appointments);
+    const appo = test.map((app, index) => {
+      return app._id;
+    });
+    const t = await doctorModel.findByIdAndUpdate(req.params.id, {
+      $push: { appointments: appo },
+    });
+    req.flash("saved", true);
+    res.redirect(req.get("referer"));
+  } catch (error) {
+    res.redirect(req.get("referer"));
+  }
+};
 
 module.exports = {
   doctorsPage,
@@ -225,5 +273,7 @@ module.exports = {
   update,
   deleteDoctor,
   getProfile,
-
+  makeAppointments,
+  makeAppointmentss,
+  deleteAppoint,
 };

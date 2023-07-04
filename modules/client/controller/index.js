@@ -1,4 +1,5 @@
 const getHome = (req, res) => {
+  console.log(req.session);
   res.render("client/index", { session: req.session });
 };
 
@@ -13,5 +14,8 @@ const getDepartments = (req, res) => {
 const getDoctors = (req, res) => {
   res.render("client/doctors", { session: req.session });
 };
+const getDoctorsAppointments = (req, res) => {
+  res.render("client/appointments", { session: req.session });
+};
 
-module.exports = { getHome, getAbout, getDepartments, getDoctors };
+module.exports = { getHome, getAbout, getDepartments, getDoctors,getDoctorsAppointments };

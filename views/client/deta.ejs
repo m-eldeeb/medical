@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Basic -->
+    <meta http-equiv="Content-Security-Policy" content="..." />
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Mobile Metas -->
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <!-- Site Metas -->
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link rel="shortcut icon" href="/assets/img/favicon.png" type="" />
+
+    <title>Care</title>
+
+    <!-- bootstrap core css -->
+    <link rel="stylesheet" type="text/css" href="/assets/css/bootstrap.css" />
+
+    <!-- fonts style -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!--owl slider stylesheet -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/assets/css/owl.carousel.min.css"
+    />
+
+    <!-- font awesome style -->
+    <link href="/assets/css/font-awesome.min.css" rel="stylesheet" />
+
+    <!-- Custom styles for this template -->
+    <link href="/assets/css/style.css" rel="stylesheet" />
+    <!-- responsive style -->
+    <link href="/assets/css/responsive.css" rel="stylesheet" />
+
+    <style>
+      .cc {
+        height: 180px;
+        width: 190px;
+        object-fit: contain;
+      }
+      .ww {
+        width: 40%;
+      }
+      body {
+        background-color: #dddddd78;
+      }
+      span {
+        display: inline-block;
+        margin-bottom: 5px;
+      }
+      .bbb {
+        background-color: #dddddd78;
+        padding: 5px;
+        border: 1px solid #fff;
+        border-radius: 5px;
+      }
+      .booked {
+        opacity: 0.5;
+        pointer-events: none;
+      }
+      p {
+        line-height: 1.7;
+      }
+    </style>
+  </head>
+
+  <body class="sub_page">
+    <div class="hero_area">
+      <div class="hero_bg_box">
+        <img src="/assets/images/hero-bg.png" alt="" />
+      </div>
+
+      <!-- header section strats -->
+      <header class="header_section">
+        <div class="container">
+          <nav class="navbar navbar-expand-lg custom_nav-container">
+            <a class="navbar-brand" href="/">
+              <span> Care </span>
+            </a>
+
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-toggle="collapse"
+              data-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class=""> </span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav">
+                <li class="nav-item active">
+                  <a class="nav-link" href="/"
+                    >Home <span class="sr-only">(current)</span></a
+                  >
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/about">About</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/departments">Departments</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/doctors">Doctors</a>
+                </li>
+                <% if (typeof session !== 'undefined' && session.user?.isLoggedIn) { %>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/signup">
+                      <i
+                        class="fa fa-user font-weight-bold mr-1"
+                        aria-hidden="true"
+                      ></i
+                      >Sign Up</a
+                    >
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/login"
+                      ><i
+                        class="fa fa-sign-in font-weight-bold mr-1"
+                        aria-hidden="true"
+                      ></i
+                      >Login</a
+                    >
+                  </li>
+               
+                  <% } else { %>
+                    <li class="nav-item">
+                      <a class="nav-link" href="/doctors/appointments">
+                        <i
+                          class="fa fa-stethoscope font-weight-bold mr-1"
+                          aria-hidden="true"
+                        ></i
+                        >Book Appointment</a
+                      >
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="/profile">
+                        <i
+                          class="fa fa-user font-weight-bold mr-1"
+                          aria-hidden="true"
+                        ></i
+                        >Profile</a
+                      >
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="/logout"
+                        ><i
+                          class="fa fa-sign-out font-weight-bold mr-1"
+                          aria-hidden="true"
+                        ></i
+                        >Logout</a
+                      >
+                    </li>
+                  <% } %>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </header>
+      <!-- end header section -->
+    </div>
+    <div class="container">
+      <div class="main-body mt-5 mb-5">
+        <div class="row">
+          <div class="col-md-10 offset-1 card p-2 shadow">
+            <h1 class="mb-0">Doctors Appointments</h1>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-10 offset-1 p-2 mt-2">
+            <% for(let i = 0; i< doctor.length ;i++){%>
+
+            <div class="card p-3 mb-2 shadow">
+              <div class="d-flex">
+                <div class="box ww text-center">
+                  <img
+                    class="client-img cc rounded-circle"
+                    src="http://localhost:3000/<%= doctor[i]?.imageUrl%>"
+                    alt=""
+                  />
+                  <ul class="list-unstyled list mt-3 text-left">
+                    <li>
+                      <i
+                        class="fa fa-user-o text-primary fa-fw"
+                        aria-hidden="true"
+                      ></i>
+                      <span class="w-25 font-weight-bold mr-3">Full Name: </span
+                      ><%= doctor[i]?.name%>
+                    </li>
+                    <li>
+                      <i
+                        class="fa fa-envelope text-primary fa-fw"
+                        aria-hidden="true"
+                      ></i>
+                      <span class="w-25 font-weight-bold mr-3">Email: </span><%=
+                      doctor[i]?.email%>
+                    </li>
+                    <li>
+                      <i
+                        class="fa fa-map-marker text-primary fa-fw"
+                        aria-hidden="true"
+                      ></i>
+                      <span class="w-25 font-weight-bold mr-3">Area: </span><%=
+                      doctor[i]?.address%>
+                    </li>
+                    <li>
+                      <i
+                        class="fa fa-phone text-primary fa-fw"
+                        aria-hidden="true"
+                      ></i>
+                      <span class="w-25 font-weight-bold mr-3">phone: </span><%=
+                      doctor[i]?.phone%>
+                    </li>
+                    <li>
+                      <i
+                        class="fa fa-stethoscope text-primary fa-fw"
+                        aria-hidden="true"
+                      ></i>
+                      <span class="w-25 font-weight-bold mr-3">Specialty: </span
+                      ><%= doctor[i]?.specialization%>
+                    </li>
+                  </ul>
+                </div>
+                <!---------------------------------------------------------------------------->
+                <div
+                  class="box w-75 d-flex flex-wrap justify-content-center"
+                >
+                <% for (let index = 0; index <doctor[i]?.appointments.length;index++) { %>
+                  <div class="bbb m-1">
+                        <p class="mb-0">
+                          <i
+                            class="fa fa-calendar fa-fw"
+                            aria-hidden="true"
+                          ></i>
+                          Date: <%= doctor[i]?.appointments[index]?.date%>
+                        </p>
+                        <p class="mb-0">
+                          <i
+                            class="fa fa-calendar-check-o fa-fw"
+                            aria-hidden="true"
+                          ></i>
+                          Day: <%= new
+                          Date(doctor[i]?.appointments[index]?.date).toLocaleString('en-us',
+                          {weekday:'long'})%>
+                        </p>
+                        <% 
+                        var t = doctor[i]?.appointments[index]?.time;
+                        let hour = parseInt(t.substring(0, 2));
+  let minute = t.substring(3, 5);
+  let period = hour >= 12 ? 'PM' : 'AM';
+  hour = hour % 12 || 12;
+  let tt =  hour + ':' + minute + ' ' + period;
+%>
+                        <p class="mb-0">
+                          <i class="fa fa-clock-o fa-fw" aria-hidden="true"></i>
+                         Time: <%= tt %>
+                        </p>
+
+                        <%if(doctor[i]?.appointments[index]?.picked == true) {%>
+
+                        <button class="btn btn-danger w-100 booked">
+                          Booked
+                        </button>
+                        <%}else{%>
+                        <button
+                        id="book"
+                          data-id="<%= doctor[i]?.appointments[index]?._id %>"
+                          class="btn btn-danger w-100"
+                        >
+                          Book
+                        </button>
+                        <%}%>
+                        
+                      </div>             
+                                  <% } %>
+                </div>
+              </div>
+            </div>
+            <% }%>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- footer section -->
+    <footer class="footer_section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 col-lg-4 footer_col">
+            <div class="footer_contact">
+              <h4>Reach at..</h4>
+              <div class="contact_link_box">
+                <a href="">
+                  <i class="fa fa-map-marker" aria-hidden="true"></i>
+                  <span> Location </span>
+                </a>
+                <a href="">
+                  <i class="fa fa-phone" aria-hidden="true"></i>
+                  <span> Call +01 1234567890 </span>
+                </a>
+                <a href="">
+                  <i class="fa fa-envelope" aria-hidden="true"></i>
+                  <span> demo@gmail.com </span>
+                </a>
+              </div>
+            </div>
+            <div class="footer_social">
+              <a href="">
+                <i class="fa fa-facebook" aria-hidden="true"></i>
+              </a>
+              <a href="">
+                <i class="fa fa-twitter" aria-hidden="true"></i>
+              </a>
+              <a href="">
+                <i class="fa fa-linkedin" aria-hidden="true"></i>
+              </a>
+              <a href="">
+                <i class="fa fa-instagram" aria-hidden="true"></i>
+              </a>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4 footer_col">
+            <div class="footer_detail">
+              <h4>About</h4>
+              <p>
+                Beatae provident nobis mollitia magnam voluptatum, unde dicta
+                facilis minima veniam corporis laudantium alias tenetur eveniet
+                illum reprehenderit fugit a delectus officiis blanditiis ea.
+              </p>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3 mx-auto footer_col">
+            <div class="footer_link_box">
+              <h4>Links</h4>
+              <div class="footer_links">
+                <a class="active" href="index.html"> Home </a>
+                <a class="" href="about.html"> About </a>
+                <a class="" href="departments.html"> Departments </a>
+                <a class="" href="doctors.html"> Doctors </a>
+                <a class="" href="contact.html"> Contact Us </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="footer-info">
+          <p>
+            made with <i class="fa fa-heart" aria-hidden="true"></i> All Rights
+            Reserved &copy; <span id="displayYear"></span>
+          </p>
+        </div>
+      </div>
+    </footer>
+    <!-- footer section -->
+
+    <!-- jQery -->
+    <script
+      type="text/javascript"
+      src="/assets/js/jquery-3.4.1.min.js"
+    ></script>
+
+    <!-- popper js -->
+    <script type="text/javascript" src="/assets/js/popper.min.js"></script>
+    <!-- bootstrap js -->
+    <script type="text/javascript" src="/assets/js/bootstrap.js"></script>
+    <!-- owl slider -->
+    <script
+      type="text/javascript"
+      src="/assets/js/owl.carousel.min.js"
+    ></script><script src="/assets/js/sweetalert2.all.min.js"></script>
+    <!-- custom js -->    <script type="text/javascript" src="/assets/js/fancybox.umd.js"></script>
+    <script type="text/javascript" src="/assets/js/custom.js"></script>
+  </body>
+</html>

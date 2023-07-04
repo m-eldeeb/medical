@@ -3,7 +3,11 @@ const appointmentModel = require("../../../DB/model/Appointment");
 const labModel = require("../../../DB/model/Lab");
 
 const getAppointments = async (req, res) => {
-  const appointments = await appointmentModel.find({}).populate("patient_id");
+  const appointments = await appointmentModel
+    .find({ doctor_id: req.session.doctor.userID })
+    .populate("patient_id")
+    .populate("doctor_id");
+
   res.render("admin/appointments", {
     title: "Appointments",
     appointments,
@@ -14,7 +18,7 @@ const examine = async (req, res) => {
   const appointment = await appointmentModel.findById(req.params.id);
   await doctorModel.findOneAndUpdate(
     { _id: req.session.doctor.userID },
-    { $push: { patients: appointment.patient_id._id } },
+    { $push: { patients: appointment?.patient_id?._id } },
     { new: true }
   );
   req.flash("examine", true);
@@ -77,6 +81,7 @@ const updateAppointment = async (req, res) => {
     const {
       appointmentDate,
       status,
+      complaint,
       medicine,
       dosage,
       frequency,
@@ -94,7 +99,7 @@ const updateAppointment = async (req, res) => {
 
     await appointmentModel.findOneAndUpdate(
       { _id: req.params.id },
-      { scheduled: appointmentDate, status, prescriptions },
+      { scheduled: appointmentDate, status, prescriptions, complaint },
       { new: true }
     );
     req.flash("done", true);

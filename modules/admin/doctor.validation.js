@@ -10,6 +10,7 @@ const signupShema = {
       cPassword: Joi.string().valid(Joi.ref("password")).required(),
       phone: Joi.string().min(11).max(11),
       address: Joi.string().required(),
+      city: Joi.string().required(),
       specialization: Joi.string().required(),
       gender: Joi.string().required().valid('Male','Female'),
     }),
@@ -29,6 +30,7 @@ const updateSchema = {
     .keys({
       userName: Joi.string().required(),
       phone: Joi.string().min(11).max(11),
+      city: Joi.string().required(),
       address: Joi.string().required(),
       specialization: Joi.string().required(),
     }),
